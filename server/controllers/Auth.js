@@ -117,7 +117,6 @@ exports.login = async (req, res) => {
   try {
     // Get email and password from request body
     const { email, password } = req.body
-
     // Check if email or password is missing
     if (!email || !password) {
       // Return 400 Bad Request status code with error message
@@ -126,10 +125,8 @@ exports.login = async (req, res) => {
         message: `Please Fill up All the Required Fields`,
       })
     }
-
     // Find user with provided email
     const user = await User.findOne({ email }).populate("additionalDetails")
-
     // If user not found with provided email
     if (!user) {
       // Return 401 Unauthorized status code with error message
@@ -138,7 +135,6 @@ exports.login = async (req, res) => {
         message: `User is not Registered with Us Please SignUp to Continue`,
       })
     }
-
     // Generate JWT token and Compare Password
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
@@ -147,9 +143,7 @@ exports.login = async (req, res) => {
         {
           expiresIn: "24h",
         }
-      )
-
-      // Save token to user document in database
+      )      // Save token to user document in database
       user.token = token
       user.password = undefined
       // Set cookie for token and return success response
