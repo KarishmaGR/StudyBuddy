@@ -46,7 +46,7 @@ export async function BuyCourse(
       )
       return
     }
-
+    console.log(token)
     // Initiating the Order in Backend
     const orderResponse = await apiConnector(
       "POST",
@@ -82,6 +82,9 @@ export async function BuyCourse(
         verifyPayment({ ...response, courses }, token, navigate, dispatch)
       },
     }
+
+    console.log(options);
+     
     const paymentObject = new window.Razorpay(options)
 
     paymentObject.open()
@@ -90,7 +93,7 @@ export async function BuyCourse(
       console.log(response.error)
     })
   } catch (error) {
-    console.log("PAYMENT API ERROR............", error)
+    console.log("PAYMENT API ERROR............", error.response)
     toast.error("Could Not make Payment.")
   }
   toast.dismiss(toastId)

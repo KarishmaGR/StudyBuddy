@@ -1,6 +1,6 @@
 {
   "name": "studybuddy-client",
-  "description": "This is the client side of the StudyNotion App",
+  "description": "This is the client side of the StudyByddy App",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
